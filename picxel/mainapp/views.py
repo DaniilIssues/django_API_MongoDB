@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.views.generic import ListView
 from rest_framework import viewsets
 from mainapp.serializers import ImageSerializer, CategorySerializer, TagSerializer
 from mainapp.models import Image, Tag, Category
-from rest_framework.decorators import api_view, renderer_classes
-from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
-from rest_framework.response import Response
+from PIL import Image as Imag
+from django.conf import settings
+import os
 
 
 class ImageViewSet(viewsets.ModelViewSet):
@@ -22,15 +22,28 @@ class TagViewSet(viewsets.ModelViewSet):
     serializer_class = TagSerializer
 
 
-@api_view(['GET'])
-@renderer_classes([TemplateHTMLRenderer, JSONRenderer])
-def main(request):
-    queryset = Image.objects.all()
+class ImagesListView(ListView):
+    model = Image
+    paginate_by = 18
+    template_name = 'mainapp/index.html'
 
-    if request.accepted_renderer.format == 'html':
-        data = {'users': queryset}
-        return Response(data, template_name='mainapp/index.html')
 
-    serializer = ImageSerializer(instance=queryset)
-    data = serializer.data
-    return Response(data)
+# @api_view(['GET'])
+# @renderer_classes([TemplateHTMLRenderer, JSONRenderer])
+# def main(request, page=1):
+#     queryset = Image.objects.all()
+#
+#     if request.accepted_renderer.format == 'html':
+#         paginator = Paginator(queryset, 20)
+#         try:
+#             image_paginator = paginator.page(page)
+#         except PageNotAnInteger:
+#             image_paginator = paginator.page(1)
+#         except EmptyPage:
+#             image_paginator = paginator.page(paginator.num_pages)
+#         data = {'images': image_paginator}
+#         return Response(data, template_name='mainapp/index.html')
+#
+#     serializer = ImageSerializer(instance=queryset)
+#     data = serializer.data
+#     return Response(data)
