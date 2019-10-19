@@ -5,7 +5,7 @@ from rest_framework import serializers
 class ImageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Image
-        fields = ['tags', 'category', 'source', 'size', 'author', 'license', 'pic']
+        fields = ['tags', 'category', 'source', 'size', 'author', 'license', 'pic_original', 'pic_min']
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):

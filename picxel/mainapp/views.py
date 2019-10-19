@@ -24,26 +24,7 @@ class TagViewSet(viewsets.ModelViewSet):
 
 class ImagesListView(ListView):
     model = Image
-    paginate_by = 18
+    paginate_by = 20
     template_name = 'mainapp/index.html'
 
 
-# @api_view(['GET'])
-# @renderer_classes([TemplateHTMLRenderer, JSONRenderer])
-# def main(request, page=1):
-#     queryset = Image.objects.all()
-#
-#     if request.accepted_renderer.format == 'html':
-#         paginator = Paginator(queryset, 20)
-#         try:
-#             image_paginator = paginator.page(page)
-#         except PageNotAnInteger:
-#             image_paginator = paginator.page(1)
-#         except EmptyPage:
-#             image_paginator = paginator.page(paginator.num_pages)
-#         data = {'images': image_paginator}
-#         return Response(data, template_name='mainapp/index.html')
-#
-#     serializer = ImageSerializer(instance=queryset)
-#     data = serializer.data
-#     return Response(data)

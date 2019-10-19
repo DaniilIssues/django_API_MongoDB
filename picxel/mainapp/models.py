@@ -19,4 +19,5 @@ class Image(models.Model):
     size = models.CharField(max_length=70)
     author = models.CharField(max_length=70, null=True, blank=True)
     license = models.CharField(max_length=70, null=True, blank=True)
-    pic = models.ImageField(upload_to='pic/')
+    pic_original = models.ImageField(upload_to='orig/', null=True)
+    pic_min = models.ImageField(upload_to='min/', null=True)

@@ -49,7 +49,8 @@ class Command(BaseCommand):
             path = [i['path'].strip('full/') for i in image['pic_result']]
             category_name = image['category'].strip()
             category = Category.objects.get(name=category_name)
-            new_image = Image(category=category, source=_source, size=_size, author=_author, license=_license, pic=path[0])
+            new_image = Image(category=category, source=_source, size=_size, author=_author, license=_license,
+                              pic_original=f"orig/{path[0]}", pic_min =f"min/{path[0]}")
             new_image.save()
             new = Image.objects.get(pk=pk+1)
             for tag in tagers:
