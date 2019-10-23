@@ -21,3 +21,5 @@ class Image(models.Model):
     license = models.CharField(max_length=70, null=True, blank=True)
     pic_original = models.ImageField(upload_to='orig/', null=True)
     pic_min = models.ImageField(upload_to='min/', null=True)
+
+
